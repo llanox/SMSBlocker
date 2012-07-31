@@ -2,9 +2,11 @@
     package="com.llanox.blocker.sms"
     android:versionCode="1"
     android:versionName="1.0" >
-    
 <uses-permission android:name="android.permission.READ_SMS"></uses-permission>
+<uses-permission android:name="android.permission.WRITE_SMS"></uses-permission>
     
+
+   
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="15" />

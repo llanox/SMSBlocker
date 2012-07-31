@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener{
 
+	private ListView mListSMS;
 	
 	// Create an anonymous implementation of OnClickListener.
     private OnItemClickListener mItemSMSListener = new OnItemClickListener() {
@@ -30,9 +31,12 @@ public class MainActivity extends Activity implements OnClickListener{
 			int numberIndex = itemData.indexOf("Number:")+"Number:".length();
 			
 			String number = itemData.substring(numberIndex, msgIndex).trim();
-			SMSContentProvider.deleteAllSMSbyNumber(number, view.getContext());
+			int deletedSMS = SMSContentProvider.deleteAllSMSbyNumber(number, view.getContext());
 		
-			Toast.makeText(getApplicationContext(), "Item pressed. Number --> "+number, Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "Item pressed. Number --> "+number+" Deleted sms "+deletedSMS, Toast.LENGTH_LONG).show();
+			
+		    
+	        updateSMSList(mListSMS);
 			
 		}
 
@@ -43,25 +47,19 @@ public class MainActivity extends Activity implements OnClickListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        
-        ListView list = (ListView) findViewById(R.id.msgs_list);
-
-        List<String> msgList = SMSContentProvider.getSMS(getApplicationContext());
-        
-        
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, msgList); 
-        list.setAdapter(adapter);
-               
-        
-        
-        list.setOnItemClickListener(mItemSMSListener);
-        
-        
-
-        
+        setContentView(R.layout.activity_main);        
+        mListSMS = (ListView) findViewById(R.id.msgs_list);
+        updateSMSList(mListSMS);             
+        mListSMS.setOnItemClickListener(mItemSMSListener);                 
         
     }
+
+	private void updateSMSList(ListView list) {
+		List<String> msgList = SMSContentProvider.getSMS(getApplicationContext());       
+        
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_2, msgList); 
+        list.setAdapter(adapter);
+	}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

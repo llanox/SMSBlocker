@@ -9,7 +9,7 @@ import android.net.Uri;
 
 public class SMSContentProvider {
 	
-	
+
 	
 	
 	   public static List<String> getSMS(Context ctx) {     
@@ -36,9 +36,39 @@ public class SMSContentProvider {
 	     return list;
 	    }
 
-	public static void deleteAllSMSbyNumber(String number, Context ctx) {
+	   
+	   
+	public static int deleteAllSMSbyNumber(String number, Context ctx) {
 	
+		    Uri deleteUri = Uri.parse("content://sms/");
+		    String thread_id= findThreadIdByAddress(number,ctx);
+		    
+		    return ctx.getContentResolver().delete(deleteUri, "thread_id=?", new String[] {thread_id});
+		    
+	}
+
+
+
+	public static String findThreadIdByAddress(String number, Context ctx) {
 		
+		Uri uri = Uri.parse("content://sms/inbox"); 
+		String thread_id ="";
+		
+		Cursor c = null;
+	        try{
+	            c = ctx.getContentResolver().query(uri, new String[] {"thread_id"}, "address=?" ,new String[] {number},null); 
+	        }catch(Exception e){
+	            e.printStackTrace();
+	        }
+	      
+	        if(c != null && c.moveToFirst()){
+	        	
+	        	thread_id= c.getString(0);
+	        }
+	        
+	        
+	        
+		return thread_id;
 	}
 
 }
