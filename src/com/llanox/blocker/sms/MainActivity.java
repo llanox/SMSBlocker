@@ -57,7 +57,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	private void updateSMSList(ListView list) {
 		List<String> msgList = SMSContentProvider.getSMS(getApplicationContext());       
         
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_2, msgList); 
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, msgList); 
         list.setAdapter(adapter);
 	}
 
