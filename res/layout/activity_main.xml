@@ -9,5 +9,19 @@
         android:layout_height="match_parent"
         android:layout_weight="1" >
     </ListView>
+    
+        <ListView
+        android:id="@+id/msgs_list1"
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+    </ListView>
+    
+        <ListView
+        android:id="@+id/msgs_list2"
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="1" >
+    </ListView>
 
 </LinearLayout>

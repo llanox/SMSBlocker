@@ -1,4 +1,4 @@
-package com.llanox.blocker.sms;
+package co.com.llanox.mobile.smsblocker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +40,10 @@ public class SMSContentProvider {
 	   
 	public static int deleteAllSMSbyNumber(String number, Context ctx) {
 	
-		    Uri deleteUri = Uri.parse("content://sms/");
+		    Uri smsURI = Uri.parse("content://sms/");
 		    String thread_id= findThreadIdByAddress(number,ctx);
 		    
-		    return ctx.getContentResolver().delete(deleteUri, "thread_id=?", new String[] {thread_id});
+		    return ctx.getContentResolver().delete(smsURI, "thread_id=?", new String[] {thread_id});
 		    
 	}
 

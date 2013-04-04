@@ -1,6 +1,7 @@
-package com.llanox.blocker.sms;
+package co.com.llanox.mobile.smsblocker;
 
 import java.util.List;
+
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -50,9 +51,16 @@ public class MainActivity extends Activity implements OnClickListener{
         setContentView(R.layout.activity_main);        
         mListSMS = (ListView) findViewById(R.id.msgs_list);
         updateSMSList(mListSMS);             
-        mListSMS.setOnItemClickListener(mItemSMSListener);                 
+        mListSMS.setOnItemClickListener(mItemSMSListener);
+        createDatabase();
         
     }
+
+	private void createDatabase() {
+		
+		
+		
+	}
 
 	private void updateSMSList(ListView list) {
 		List<String> msgList = SMSContentProvider.getSMS(getApplicationContext());       
@@ -63,7 +71,7 @@ public class MainActivity extends Activity implements OnClickListener{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
+      getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
 

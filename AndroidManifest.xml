@@ -1,23 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.llanox.blocker.sms"
+    package="co.com.llanox.mobile.smsblocker"
     android:versionCode="1"
     android:versionName="1.0" >
-<uses-permission android:name="android.permission.READ_SMS"></uses-permission>
-<uses-permission android:name="android.permission.WRITE_SMS"></uses-permission>
-    
 
-   
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="15" />
+        android:targetSdkVersion="8" />
+<uses-permission android:name="android.permission.READ_SMS"></uses-permission>
+<uses-permission android:name="android.permission.WRITE_SMS"></uses-permission>
 
     <application
+        android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
+            android:name="co.com.llanox.mobile.smsblocker.MainActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
