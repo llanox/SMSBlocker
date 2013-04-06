@@ -7,15 +7,25 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
-public class SMSContentProvider {
+/***
+ * It's a data access class what allow apply some basic CRUD operations to Text Messages
+ * in Messenger application inbox.      
+ * @author llanox
+ * @version 1.0
+ * */
 
 
+public class SMSDataAccess {
 	
+  // URI to get sms's from inbox
+    public static final String SMS_INBOX_URI="content://sms/inbox";
+  
+	  
 	
-	   public static List<String> getSMS(Context ctx) {     
+	   public static List<String> findAllSMS(Context ctx) {     
 		   
 	        List<String> list = new ArrayList<String>();
-	        Uri uri = Uri.parse("content://sms/inbox");
+	        Uri uri = Uri.parse(SMS_INBOX_URI);
 	        Cursor c = null;
 	        try{
 	            c = ctx.getContentResolver().query(uri, null, null ,null,null); 
@@ -26,7 +36,6 @@ public class SMSContentProvider {
 	            for (boolean hasData = c.moveToFirst(); hasData; hasData = c.moveToNext()) {
 	                final String address = c.getString(c.getColumnIndex("address"));
 	                final String body = c.getString(c.getColumnIndexOrThrow("body"));
-	                
 	                list.add("Number:"+address+"\n"+"Message: " + body);
 	            }
 	        }catch(Exception e){
@@ -40,7 +49,7 @@ public class SMSContentProvider {
 	   
 	public static int deleteAllSMSbyNumber(String number, Context ctx) {
 	
-		    Uri smsURI = Uri.parse("content://sms/");
+		    Uri smsURI = Uri.parse(SMS_INBOX_URI);
 		    String thread_id= findThreadIdByAddress(number,ctx);
 		    
 		    return ctx.getContentResolver().delete(smsURI, "thread_id=?", new String[] {thread_id});
@@ -51,7 +60,7 @@ public class SMSContentProvider {
 
 	public static String findThreadIdByAddress(String number, Context ctx) {
 		
-		Uri uri = Uri.parse("content://sms/inbox"); 
+		Uri uri = Uri.parse(SMS_INBOX_URI); 
 		String thread_id ="";
 		
 		Cursor c = null;
@@ -65,9 +74,7 @@ public class SMSContentProvider {
 	        	
 	        	thread_id= c.getString(0);
 	        }
-	        
-	        
-	        
+	        	        
 		return thread_id;
 	}
 

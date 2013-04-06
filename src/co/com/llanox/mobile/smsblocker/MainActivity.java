@@ -32,7 +32,7 @@ public class MainActivity extends Activity implements OnClickListener{
 			int numberIndex = itemData.indexOf("Number:")+"Number:".length();
 			
 			String number = itemData.substring(numberIndex, msgIndex).trim();
-			int deletedSMS = SMSContentProvider.deleteAllSMSbyNumber(number, view.getContext());
+			int deletedSMS = SMSDataAccess.deleteAllSMSbyNumber(number, view.getContext());
 		
 			Toast.makeText(getApplicationContext(), "Item pressed. Number --> "+number+" Deleted sms "+deletedSMS, Toast.LENGTH_LONG).show();
 			
@@ -63,7 +63,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	}
 
 	private void updateSMSList(ListView list) {
-		List<String> msgList = SMSContentProvider.getSMS(getApplicationContext());       
+		List<String> msgList = SMSDataAccess.findAllSMS(getApplicationContext());       
         
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, msgList); 
         list.setAdapter(adapter);
